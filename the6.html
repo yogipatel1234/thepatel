@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogi patel | code with yogi patel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Default Dark Theme */
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c63ff;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #ef4444;
+            --header-bg: linear-gradient(180deg, rgba(74, 108, 247, 0.1) 0%, transparent 100%);
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c63ff;
+            --dark-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #ef4444;
+            --header-bg: linear-gradient(180deg, rgba(74, 108, 247, 0.05) 0%, transparent 100%);
+        }
+
+        /* Neon Matrix Theme */
+        [data-theme="neon-matrix"] {
+            --primary-color: #00ff41;
+            --secondary-color: #00d9ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-primary: #e0e0e0;
+            --text-secondary: #00ff41;
+            --border-color: #00ff41;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #ff0040;
+            --header-bg: linear-gradient(180deg, rgba(0, 255, 65, 0.1) 0%, transparent 100%);
+        }
+
+        /* CyberEdge Theme */
+        [data-theme="cyber-edge"] {
+            --primary-color: #ff00ff;
+            --secondary-color: #00ffff;
+            --dark-bg: #0d0221;
+            --card-bg: rgba(30, 30, 60, 0.5);
+            --text-primary: #f0f0ff;
+            --text-secondary: #a0a0ff;
+            --border-color: rgba(255, 0, 255, 0.3);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #ff3366;
+            --header-bg: linear-gradient(180deg, rgba(255, 0, 255, 0.1) 0%, transparent 100%);
+        }
+
+        /* NovaPulse Theme */
+        [data-theme="nova-pulse"] {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --dark-bg: #1a1a2e;
+            --card-bg: #16213e;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --border-color: #343a40;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #ff4757;
+            --header-bg: linear-gradient(180deg, rgba(255, 107, 107, 0.1) 0%, transparent 100%);
+        }
+
+        /* TechGrid Theme */
+        [data-theme="tech-grid"] {
+            --primary-color: #0984e3;
+            --secondary-color: #74b9ff;
+            --dark-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --border-color: #dfe6e9;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #d63031;
+            --header-bg: linear-gradient(180deg, rgba(9, 132, 227, 0.05) 0%, transparent 100%);
+        }
+
+        /* Datastream Theme */
+        [data-theme="datastream"] {
+            --primary-color: #f39c12;
+            --secondary-color: #e74c3c;
+            --dark-bg: #2c3e50;
+            --card-bg: #34495e;
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --border-color: #7f8c8d;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --delete-color: #c0392b;
+            --header-bg: linear-gradient(180deg, rgba(243, 156, 18, 0.1) 0%, transparent 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme Switcher Styles */
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(74, 108, 247, 0.1);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+            min-width: 180px;
+            display: none;
+        }
+
+        .theme-dropdown.active {
+            display: block;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-option:hover {
+            background-color: rgba(74, 108, 247, 0.1);
+        }
+
+        .theme-option.active {
+            background-color: rgba(74, 108, 247, 0.2);
+        }
+
+        .theme-colors {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .theme-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 1.5rem 0;
+            text-align: center;
+            background: var(--header-bg);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        /* Search Section */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        .clear-search {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0 1rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-search.visible {
+            display: flex;
+        }
+
+        .clear-search:hover {
+            color: var(--text-primary);
+        }
+
+        .search-results {
+            margin-top: 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* AI Tools Grid */
+        .tools-container {
+            padding: 1.5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .tool-card:hover::before {
+            transform: translateY(0);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            background: var(--gradient);
+        }
+
+        .tool-name {
+            font-weight: 600;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .tool-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--delete-color);
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tool-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Add Shortcut Button */
+        .add-shortcut-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .add-shortcut-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-shortcut-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .color-option:hover {
+            border-color: var(--text-primary);
+        }
+
+        .color-option.selected {
+            border-color: var(--text-primary);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: calc(100vw - 40px);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            border-left-color: var(--delete-color);
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .no-results p {
+            margin-bottom: 1.5rem;
+        }
+
+        .no-results .btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .no-results .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+                border-radius: 16px;
+            }
+
+            .search-input {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .search-btn {
+                padding: 1rem;
+                justify-content: center;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 1rem;
+            }
+
+            .tool-card {
+                padding: 1rem;
+            }
+
+            .tool-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .tool-name {
+                font-size: 0.9rem;
+            }
+
+            .tool-description {
+                font-size: 0.75rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .theme-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .tool-card {
+                padding: 0.75rem;
+            }
+
+            .tool-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .tool-name {
+                font-size: 0.85rem;
+            }
+
+            .tool-description {
+                font-size: 0.7rem;
+            }
+
+            .delete-btn {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+
+            .add-shortcut-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+            }
+
+            .form-input, .form-select {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .color-option {
+                width: 35px;
+                height: 35px;
+            }
+
+            .toast {
+                right: 10px;
+                bottom: 10px;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Add touch-friendly hover states */
+        @media (hover: none) {
+            .tool-card:hover {
+                transform: none;
+            }
+
+            .tool-card:active {
+                transform: scale(0.98);
+            }
+
+            .delete-btn {
+                opacity: 1;
+            }
+
+            .add-shortcut-btn:hover {
+                transform: none;
+            }
+
+            .add-shortcut-btn:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Theme-specific styles */
+        [data-theme="neon-matrix"] .tool-card {
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
+        [data-theme="neon-matrix"] .tool-card:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+        }
+
+        [data-theme="cyber-edge"] .tool-card {
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+        }
+
+        [data-theme="cyber-edge"] .tool-card:hover {
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+        }
+
+        [data-theme="nova-pulse"] .tool-card {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="nova-pulse"] .tool-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="tech-grid"] .tool-card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="tech-grid"] .tool-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="datastream"] .tool-card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="datastream"] .tool-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Search box theme-specific styles */
+        [data-theme="neon-matrix"] .search-box {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        [data-theme="neon-matrix"] .search-box:focus-within {
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
+        }
+
+        [data-theme="cyber-edge"] .search-box {
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        }
+
+        [data-theme="cyber-edge"] .search-box:focus-within {
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-dropdown" id="themeDropdown">
+            <div class="theme-option active" data-theme="dark">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #0f172a;"></div>
+                    <div class="theme-color" style="background: #4a6cf7;"></div>
+                </div>
+                <span>Dark</span>
+            </div>
+            <div class="theme-option" data-theme="light">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #f8fafc;"></div>
+                    <div class="theme-color" style="background: #4a6cf7;"></div>
+                </div>
+                <span>Light</span>
+            </div>
+            <div class="theme-option" data-theme="neon-matrix">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #0a0a0a;"></div>
+                    <div class="theme-color" style="background: #00ff41;"></div>
+                </div>
+                <span>Neon Matrix</span>
+            </div>
+            <div class="theme-option" data-theme="cyber-edge">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #0d0221;"></div>
+                    <div class="theme-color" style="background: #ff00ff;"></div>
+                </div>
+                <span>CyberEdge</span>
+            </div>
+            <div class="theme-option" data-theme="nova-pulse">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #1a1a2e;"></div>
+                    <div class="theme-color" style="background: #ff6b6b;"></div>
+                </div>
+                <span>NovaPulse</span>
+            </div>
+            <div class="theme-option" data-theme="tech-grid">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #f5f7fa;"></div>
+                    <div class="theme-color" style="background: #0984e3;"></div>
+                </div>
+                <span>TechGrid</span>
+            </div>
+            <div class="theme-option" data-theme="datastream">
+                <div class="theme-colors">
+                    <div class="theme-color" style="background: #2c3e50;"></div>
+                    <div class="theme-color" style="background: #f39c12;"></div>
+                </div>
+                <span>Datastream</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">Y</div>
+                <div class="logo-text">Yogi Patel</div>
+            </div>
+            <p class="subtitle">Code with Yogi Patel</p>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>AI Tools Shortcuts</h1>
+        <p>Quick access to your favorite AI tools and platforms</p>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-container">
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for AI tools...">
+            <button class="clear-search" id="clearSearch">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+                Search
+            </button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </section>
+
+    <!-- AI Tools Grid -->
+    <section class="tools-container">
+        <div class="tools-grid" id="toolsGrid">
+            <!-- Default tools will be loaded here -->
+        </div>
+
+        <div class="add-shortcut-container">
+            <button class="add-shortcut-btn" id="addShortcutBtn">
+                <i class="fas fa-plus"></i> Add Shortcut
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Yogi Patel | Code with Yogi Patel. All rights reserved.</p>
+    </footer>
+
+    <!-- Add Shortcut Modal -->
+    <div class="modal" id="addShortcutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Shortcut</h2>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="shortcutForm">
+                <div class="form-group">
+                    <label class="form-label" for="toolName">Tool Name</label>
+                    <input type="text" class="form-input" id="toolName" placeholder="e.g., ChatGPT" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="toolUrl">URL</label>
+                    <input type="url" class="form-input" id="toolUrl" placeholder="https://example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="toolDescription">Description</label>
+                    <input type="text" class="form-input" id="toolDescription" placeholder="Brief description of the tool">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="toolIcon">Icon</label>
+                    <select class="form-select" id="toolIcon">
+                        <option value="fa-robot">Robot</option>
+                        <option value="fa-code">Code</option>
+                        <option value="fa-search">Search</option>
+                        <option value="fa-comments">Comments</option>
+                        <option value="fa-comment-dots">Comment Dots</option>
+                        <option value="fa-image">Image</option>
+                        <option value="fa-palette">Palette</option>
+                        <option value="fa-paint-brush">Paint Brush</option>
+                        <option value="fa-video">Video</option>
+                        <option value="fa-user-circle">User Circle</option>
+                        <option value="fa-file-audio">File Audio</option>
+                        <option value="fa-book">Book</option>
+                        <option value="fa-presentation-screen">Presentation</option>
+                        <option value="fa-sticky-note">Sticky Note</option>
+                        <option value="fa-spell-check">Spell Check</option>
+                        <option value="fa-pen-fancy">Pen Fancy</option>
+                        <option value="fa-drafting-compass">Drafting Compass</option>
+                        <option value="fa-vector-square">Vector Square</option>
+                        <option value="fa-fire">Fire</option>
+                        <option value="fa-globe">Globe</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Color</label>
+                    <div class="color-picker" id="colorPicker">
+                        <div class="color-option selected" data-color="linear-gradient(135deg, #4a6cf7, #6c63ff)" style="background: linear-gradient(135deg, #4a6cf7, #6c63ff)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #10a37f, #0d7d5f)" style="background: linear-gradient(135deg, #10a37f, #0d7d5f)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #0078d4, #005a9e)" style="background: linear-gradient(135deg, #0078d4, #005a9e)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #8b5cf6, #7c3aed)" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #ec4899, #db2777)" style="background: linear-gradient(135deg, #ec4899, #db2777)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #f59e0b, #d97706)" style="background: linear-gradient(135deg, #f59e0b, #d97706)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #6366f1, #4f46e5)" style="background: linear-gradient(135deg, #6366f1, #4f46e5)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #f43f5e, #e11d48)" style="background: linear-gradient(135deg, #f43f5e, #e11d48)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #24292e, #1a1e22)" style="background: linear-gradient(135deg, #24292e, #1a1e22)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #000000, #333333)" style="background: linear-gradient(135deg, #000000, #333333)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #05866f, #046b58)" style="background: linear-gradient(135deg, #05866f, #046b58)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #f97316, #ea580c)" style="background: linear-gradient(135deg, #f97316, #ea580c)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #00c4cc, #00a8b5)" style="background: linear-gradient(135deg, #00c4cc, #00a8b5)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #f24e1e, #d63707)" style="background: linear-gradient(135deg, #f24e1e, #d63707)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #ff0000, #cc0000)" style="background: linear-gradient(135deg, #ff0000, #cc0000)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #7c3aed, #6d28d9)" style="background: linear-gradient(135deg, #7c3aed, #6d28d9)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #4338ca, #3730a3)" style="background: linear-gradient(135deg, #4338ca, #3730a3)"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #15aabf, #138496)" style="background: linear-gradient(135deg, #15aabf, #138496)"></div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Shortcut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <p id="toastMessage">Shortcut added successfully!</p>
+    </div>
+
+    <script>
+        // Default tools data
+        const defaultTools = [
+            { name: "ChatGPT", url: "https://chatgpt.com", description: "Advanced conversational AI", icon: "fa-robot", color: "linear-gradient(135deg, #10a37f, #0d7d5f)" },
+            { name: "Microsoft Copilot", url: "https://copilot.microsoft.com", description: "AI-powered coding assistant", icon: "fa-code", color: "linear-gradient(135deg, #0078d4, #005a9e)" },
+            { name: "Perplexity AI", url: "https://www.perplexity.ai/", description: "AI-powered search engine", icon: "fa-search", color: "linear-gradient(135deg, #8b5cf6, #7c3aed)" },
+            { name: "Chat Z AI", url: "https://chat.z.ai/", description: "Intelligent chat assistant", icon: "fa-comments", color: "linear-gradient(135deg, #ec4899, #db2777)" },
+            { name: "Claude", url: "https://claude.ai", description: "Helpful, harmless, and honest AI", icon: "fa-comment-dots", color: "linear-gradient(135deg, #f59e0b, #d97706)" },
+            { name: "Midjourney", url: "https://midjourney.com", description: "AI image generation", icon: "fa-image", color: "linear-gradient(135deg, #6366f1, #4f46e5)" },
+            { name: "DALL-E", url: "https://openai.com/dall-e-2", description: "AI art creation", icon: "fa-palette", color: "linear-gradient(135deg, #10a37f, #0d7d5f)" },
+            { name: "Stable Diffusion", url: "https://stability.ai", description: "Open-source image generation", icon: "fa-paint-brush", color: "linear-gradient(135deg, #f43f5e, #e11d48)" },
+            { name: "GitHub Copilot", url: "https://github.com/features/copilot", description: "AI pair programmer", icon: "fa-github", color: "linear-gradient(135deg, #24292e, #1a1e22)" },
+            { name: "Notion AI", url: "https://www.notion.so/product/ai", description: "AI-powered workspace", icon: "fa-sticky-note", color: "linear-gradient(135deg, #000000, #333333)" },
+            { name: "Grammarly", url: "https://www.grammarly.com", description: "AI writing assistant", icon: "fa-spell-check", color: "linear-gradient(135deg, #05866f, #046b58)" },
+            { name: "Jasper", url: "https://www.jasper.ai", description: "AI content creation", icon: "fa-pen-fancy", color: "linear-gradient(135deg, #f97316, #ea580c)" },
+            { name: "Canva AI", url: "https://www.canva.com/magic-design/", description: "AI design tools", icon: "fa-drafting-compass", color: "linear-gradient(135deg, #00c4cc, #00a8b5)" },
+            { name: "Figma AI", url: "https://www.figma.com/ai/", description: "AI design features", icon: "fa-vector-square", color: "linear-gradient(135deg, #f24e1e, #d63707)" },
+            { name: "Adobe Firefly", url: "https://firefly.adobe.com", description: "Generative AI art", icon: "fa-fire", color: "linear-gradient(135deg, #ff0000, #cc0000)" },
+            { name: "Runway ML", url: "https://runwayml.com", description: "AI video editing", icon: "fa-video", color: "linear-gradient(135deg, #7c3aed, #6d28d9)" },
+            { name: "Synthesia", url: "https://www.synthesia.io", description: "AI video generation", icon: "fa-user-circle", color: "linear-gradient(135deg, #4338ca, #3730a3)" },
+            { name: "Otter.ai", url: "https://otter.ai", description: "AI transcription", icon: "fa-file-audio", color: "linear-gradient(135deg, #15aabf, #138496)" },
+            { name: "Tome", url: "https://tome.app", description: "AI presentation maker", icon: "fa-book", color: "linear-gradient(135deg, #6366f1, #4f46e5)" },
+            { name: "Gamma", url: "https://gamma.app", description: "AI-powered presentations", icon: "fa-presentation-screen", color: "linear-gradient(135deg, #8b5cf6, #7c3aed)" }
+        ];
+
+        // Initialize tools array with default tools
+        let tools = [...defaultTools];
+        let selectedColor = "linear-gradient(135deg, #4a6cf7, #6c63ff)";
+        let filteredTools = [...tools];
+
+        // DOM Elements
+        const toolsGrid = document.getElementById('toolsGrid');
+        const addShortcutBtn = document.getElementById('addShortcutBtn');
+        const addShortcutModal = document.getElementById('addShortcutModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const shortcutForm = document.getElementById('shortcutForm');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const colorPicker = document.getElementById('colorPicker');
+        
+        // Theme switcher elements
+        const themeToggle = document.getElementById('themeToggle');
+        const themeDropdown = document.getElementById('themeDropdown');
+        const themeOptions = document.querySelectorAll('.theme-option');
+        
+        // Search elements
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const clearSearch = document.getElementById('clearSearch');
+        const searchResults = document.getElementById('searchResults');
+
+        // Load tools from localStorage on page load
+        function loadTools() {
+            const savedTools = localStorage.getItem('aiTools');
+            if (savedTools) {
+                tools = JSON.parse(savedTools);
+                filteredTools = [...tools];
+            }
+            renderTools();
+        }
+
+        // Save tools to localStorage
+        function saveTools() {
+            localStorage.setItem('aiTools', JSON.stringify(tools));
+        }
+
+        // Load theme from localStorage
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            
+            // Update active theme option
+            themeOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-theme') === savedTheme) {
+                    option.classList.add('active');
+                }
+            });
+        }
+
+        // Save theme to localStorage
+        function saveTheme(theme) {
+            localStorage.setItem('theme', theme);
+        }
+
+        // Filter tools based on search query
+        function filterTools(query) {
+            if (!query.trim()) {
+                filteredTools = [...tools];
+                searchResults.textContent = '';
+            } else {
+                const searchTerm = query.toLowerCase();
+                filteredTools = tools.filter(tool => 
+                    tool.name.toLowerCase().includes(searchTerm) || 
+                    tool.description.toLowerCase().includes(searchTerm)
+                );
+                
+                // Update search results text
+                if (filteredTools.length === 0) {
+                    searchResults.textContent = 'No tools found matching your search';
+                } else {
+                    searchResults.textContent = `Found ${filteredTools.length} tool${filteredTools.length === 1 ? '' : 's'} matching "${query}"`;
+                }
+            }
+            renderTools();
+        }
+
+        // Render tools to the grid
+        function renderTools() {
+            toolsGrid.innerHTML = '';
+            
+            if (filteredTools.length === 0) {
+                // Show no results message
+                toolsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No tools found</h3>
+                        <p>Try adjusting your search or add a new shortcut</p>
+                        <button class="btn" id="clearSearchBtn">Clear Search</button>
+                    </div>
+                `;
+                
+                // Add event listener to clear search button
+                document.getElementById('clearSearchBtn').addEventListener('click', function() {
+                    searchInput.value = '';
+                    filterTools('');
+                    clearSearch.classList.remove('visible');
+                });
+                
+                return;
+            }
+            
+            filteredTools.forEach((tool, index) => {
+                const toolCard = document.createElement('a');
+                toolCard.href = tool.url;
+                toolCard.className = 'tool-card';
+                toolCard.target = '_blank';
+                
+                // Find the actual index in the original tools array
+                const actualIndex = tools.findIndex(t => 
+                    t.name === tool.name && t.url === tool.url
+                );
+                
+                // Check if this is a default tool or a user-added tool
+                const isDefault = defaultTools.some(defaultTool => 
+                    defaultTool.name === tool.name && defaultTool.url === tool.url
+                );
+                
+                toolCard.innerHTML = `
+                    ${!isDefault ? `<button class="delete-btn" data-index="${actualIndex}"><i class="fas fa-times"></i></button>` : ''}
+                    <div class="tool-icon" style="background: ${tool.color};">
+                        <i class="fas ${tool.icon}"></i>
+                    </div>
+                    <div class="tool-name">${tool.name}</div>
+                    <div class="tool-description">${tool.description}</div>
+                `;
+                
+                toolsGrid.appendChild(toolCard);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const index = parseInt(this.getAttribute('data-index'));
+                    deleteTool(index);
+                });
+            });
+            
+            // Add click event to all tool cards
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const toolName = this.querySelector('.tool-name').textContent;
+                    showToast(`Opening ${toolName}...`);
+                });
+            });
+        }
+
+        // Delete a tool
+        function deleteTool(index) {
+            tools.splice(index, 1);
+            filteredTools = [...tools];
+            saveTools();
+            renderTools();
+            showToast('Shortcut deleted successfully!');
+        }
+
+        // Show toast notification
+        function showToast(message, isError = false) {
+            toastMessage.textContent = message;
+            toast.classList.toggle('error', isError);
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Open modal
+        function openModal() {
+            addShortcutModal.classList.add('active');
+            document.getElementById('toolName').focus();
+        }
+
+        // Close modal
+        function closeModalFunc() {
+            addShortcutModal.classList.remove('active');
+            shortcutForm.reset();
+            // Reset color selection
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector('.color-option').classList.add('selected');
+            selectedColor = "linear-gradient(135deg, #4a6cf7, #6c63ff)";
+        }
+
+        // Event Listeners
+        addShortcutBtn.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFunc);
+        cancelBtn.addEventListener('click', closeModalFunc);
+
+        // Close modal when clicking outside
+        addShortcutModal.addEventListener('click', function(e) {
+            if (e.target === addShortcutModal) {
+                closeModalFunc();
+            }
+        });
+
+        // Theme switcher
+        themeToggle.addEventListener('click', function() {
+            themeDropdown.classList.toggle('active');
+        });
+
+        // Close theme dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!themeToggle.contains(e.target) && !themeDropdown.contains(e.target)) {
+                themeDropdown.classList.remove('active');
+            }
+        });
+
+        // Theme selection
+        themeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const theme = this.getAttribute('data-theme');
+                document.body.setAttribute('data-theme', theme);
+                saveTheme(theme);
+                
+                // Update active theme option
+                themeOptions.forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Close dropdown
+                themeDropdown.classList.remove('active');
+                
+                // Show toast
+                const themeName = this.querySelector('span').textContent;
+                showToast(`Theme changed to ${themeName}`);
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const query = this.value;
+            filterTools(query);
+            
+            // Show/hide clear button
+            if (query.trim()) {
+                clearSearch.classList.add('visible');
+            } else {
+                clearSearch.classList.remove('visible');
+            }
+        });
+
+        searchBtn.addEventListener('click', function() {
+            filterTools(searchInput.value);
+        });
+
+        clearSearch.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTools('');
+            this.classList.remove('visible');
+        });
+
+        // Handle Enter key in search input
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                filterTools(this.value);
+            }
+        });
+
+        // Color picker
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.color-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                selectedColor = this.getAttribute('data-color');
+            });
+        });
+
+        // Form submission
+        shortcutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('toolName').value.trim();
+            const url = document.getElementById('toolUrl').value.trim();
+            const description = document.getElementById('toolDescription').value.trim();
+            const icon = document.getElementById('toolIcon').value;
+            
+            if (!name || !url) {
+                showToast('Please fill in all required fields!', true);
+                return;
+            }
+            
+            // Add new tool
+            tools.push({
+                name,
+                url,
+                description: description || 'AI tool',
+                icon,
+                color: selectedColor
+            });
+            
+            // Update filtered tools if search is active
+            if (searchInput.value.trim()) {
+                filterTools(searchInput.value);
+            } else {
+                filteredTools = [...tools];
+                renderTools();
+            }
+            
+            // Save and render
+            saveTools();
+            closeModalFunc();
+            showToast('Shortcut added successfully!');
+        });
+
+        // Initialize the page
+        loadTools();
+        loadTheme();
+    </script>
+</body>
+</html>
